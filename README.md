@@ -1,7 +1,7 @@
-Overall Concept
+**Overall Concept**
 Stock Sage is a web-based dashboard designed to help a business owner ("Regular Shop" user Rajesh Namnode) manage their store's key operations. It centralizes inventory control, billing/invoicing, and business performance analytics into a single, easy-to-use interface.
 
-Key Features & Modules
+**Key Features & Modules**
 1. Dashboard (The Command Center)
 This is the main landing page that provides a high-level, "at-a-glance" summary of the store's current status.
 
