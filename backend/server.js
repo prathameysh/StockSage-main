@@ -17,10 +17,7 @@ const analyticsRoutes = require("./routes/analytics")
 
 // Middleware
 app.use(
-  cors({
-    origin: process.env.FRONTEND_URL,
-    credentials: true,
-  }),
+  cors(),
 )
 app.use(express.json({ limit: "10mb" }))
 app.use(express.urlencoded({ extended: true, limit: "10mb" }))

@@ -24,16 +24,23 @@ const Register = () => {
   const password = watch("password")
 
   const onSubmit = async (data) => {
+    // Clear previous errors before a new attempt
+    if (error) {
+      dispatch(clearError())
+    }
     try {
-      const result = await dispatch(registerUser(data))
-      if (registerUser.fulfilled.match(result)) {
-        toast.success("Registration successful!")
-        navigate("/dashboard")
-      } else {
-        toast.error(result.payload || "Registration failed")
-      }
+      // `unwrap` will resolve with the actual payload for fulfilled actions
+      // and throw the rejected payload for rejected ones. This keeps the
+      // success/error branches clear and avoids false negatives.
+      await dispatch(registerUser(data)).unwrap()
+      dispatch(clearError())
+      toast.success("Registration successful!")
+      navigate("/dashboard")
     } catch (error) {
-      toast.error("Registration failed")
+      console.error("Registration error", error)
+      const msg = typeof error === "string" ? error : error?.message
+      toast.error(msg || "Registration failed")
+      dispatch(clearError())
     }
   }
 

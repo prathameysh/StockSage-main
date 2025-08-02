@@ -22,15 +22,11 @@ const Login = () => {
 
   const onSubmit = async (data) => {
     try {
-      const result = await dispatch(login(data))
-      if (login.fulfilled.match(result)) {
-        toast.success("Login successful!")
-        navigate("/dashboard")
-      } else {
-        toast.error(result.payload || "Login failed")
-      }
+      await dispatch(login(data)).unwrap()
+      toast.success("Login successful!")
+      navigate("/dashboard")
     } catch (error) {
-      toast.error("Login failed")
+      toast.error(error || "Login failed")
     }
   }
 
