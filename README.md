@@ -121,3 +121,67 @@ Barcode/QR Code Integration: Allow for scanning product barcodes to add them to 
 Reporting Exports: Add functionality to export analytics reports and bill lists as PDF or CSV files.
 
 Real-time Notifications: Implement real-time low-stock alerts via web sockets or email notifications to the store owner.
+
+
+
+
+Directory structure:
+└── prathameysh-stocksage-main/
+    ├── README.md
+    ├── backend/
+    │   ├── package.json
+    │   ├── server.js
+    │   ├── vercel.json
+    │   ├── .env.example
+    │   ├── config/
+    │   │   └── cloudinary.js
+    │   ├── middleware/
+    │   │   └── auth.js
+    │   ├── models/
+    │   │   ├── Bill.js
+    │   │   ├── Product.js
+    │   │   └── User.js
+    │   └── routes/
+    │       ├── analytics.js
+    │       ├── auth.js
+    │       ├── bills.js
+    │       └── products.js
+    └── frontend/
+        ├── index.html
+        ├── package.json
+        ├── postcss.config.js
+        ├── tailwind.config.js
+        ├── vercel.json
+        ├── vite.config.js
+        ├── .env.example
+        └── src/
+            ├── App.jsx
+            ├── index.css
+            ├── main.jsx
+            ├── components/
+            │   ├── ConfirmDialog.jsx
+            │   ├── ErrorBoundary.jsx
+            │   ├── Layout.jsx
+            │   ├── LoadingSpinner.jsx
+            │   ├── ProductModal.jsx
+            │   └── TestStyles.jsx
+            ├── pages/
+            │   ├── Analytics.jsx
+            │   ├── Bills.jsx
+            │   ├── CreateBill.jsx
+            │   ├── Dashboard.jsx
+            │   ├── Login.jsx
+            │   ├── Products.jsx
+            │   ├── Profile.jsx
+            │   └── Register.jsx
+            ├── store/
+            │   ├── store.js
+            │   └── slices/
+            │       ├── analyticsSlice.js
+            │       ├── authSlice.js
+            │       ├── billSlice.js
+            │       └── productSlice.js
+            └── utils/
+                ├── api.js
+                ├── currency.js
+                └── helpers.js
