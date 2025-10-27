@@ -53,16 +53,16 @@ connectDB()
 
 // Error handling middleware
 app.use((err, req, res, next) => {
-  console.error("Error:", err.stack)
-  res.status(500).json({
-    message: "Something went wrong!",
-    error: process.env.NODE_ENV === "development" ? err.message : "Internal server error",
-  })
+ console.error("Error:", err.stack)
+ res.status(500).json({
+ message: "Something went wrong!",
+ error: process.env.NODE_ENV === "development" ? err.message : "Internal server error",
+})
 })
 
 // Handle 404 routes
 app.use("*", (req, res) => {
-  res.status(404).json({ message: "Route not found" })
+ res.status(404).json({ message: "Route not found" })
 })
 
 /*
@@ -77,11 +77,11 @@ app.use("*", (req, res) => {
 
 // Graceful shutdown - This is also for traditional servers and can be removed for Vercel.
 process.on("SIGTERM", () => {
-  console.log("SIGTERM received, shutting down gracefully")
-  mongoose.connection.close(() => {
-    console.log("MongoDB connection closed")
-    process.exit(0)
-  })
+ console.log("SIGTERM received, shutting down gracefully")
+ mongoose.connection.close(() => {
+ console.log("MongoDB connection closed")
+ process.exit(0)
+ })
 })
 
 // ADD THIS LINE - This is what Vercel needs.
