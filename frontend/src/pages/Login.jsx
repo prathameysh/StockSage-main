@@ -127,6 +127,16 @@ const Login = () => {
               </Link>
             </p>
           </div>
+
+          <div className="mt-4 p-3 bg-gray-100 rounded-md border border-gray-300">
+            <h4 className="text-sm font-medium text-gray-700 text-center">Guest Credentials</h4>
+              <p className="mt-2 text-sm text-gray-600 text-center">
+                Email: <code className="bg-gray-200 p-1 rounded">Prat@gmail.com</code>
+              </p>
+              <p className="mt-1 text-sm text-gray-600 text-center">
+                Password: <code className="bg-gray-200 p-1 rounded">abc123def@</code>
+              </p>
+          </div>
         </form>
       </div>
     </div>

@@ -65,15 +65,15 @@ app.use("*", (req, res) => {
  res.status(404).json({ message: "Route not found" })
 })
 
-/*
-  REMOVE THIS BLOCK - Vercel handles starting the server.
+
+ // REMOVE THIS BLOCK - Vercel handles starting the server.
 
   const PORT = process.env.PORT || 3000
   app.listen(PORT, () => {
-    console.log(`Server running on port ${PORT}`)
-    console.log(`Environment: ${process.env.NODE_ENV || "development"}`)
+   console.log(`Server running on port ${PORT}`)
+  console.log(`Environment: ${process.env.NODE_ENV || "development"}`)
   })
-*/
+
 
 // Graceful shutdown - This is also for traditional servers and can be removed for Vercel.
 process.on("SIGTERM", () => {
@@ -84,5 +84,5 @@ process.on("SIGTERM", () => {
  })
 })
 
-// ADD THIS LINE - This is what Vercel needs.
-module.exports = app
+// // ADD THIS LINE - This is what Vercel needs.
+// module.exports = app
