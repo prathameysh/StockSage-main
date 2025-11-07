@@ -1,4 +1,4 @@
-"use client"
+
 
 import { useEffect } from "react"
 import { Routes, Route, Navigate } from "react-router-dom"
@@ -25,10 +25,6 @@ function App() {
     dispatch(checkAuth())
   }, [dispatch])
 
-  // Temporary test - remove this after confirming styles work
-  if (window.location.search.includes("test")) {
-    return <TestStyles />
-  }
 
   if (loading) {
     return <LoadingSpinner />

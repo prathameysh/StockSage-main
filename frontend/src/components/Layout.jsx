@@ -1,4 +1,4 @@
-"use client"
+
 
 import { useState } from "react"
 import { Outlet, Link, useLocation, useNavigate } from "react-router-dom"
