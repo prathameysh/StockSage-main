@@ -16,9 +16,18 @@ const billRoutes = require("./routes/bills")
 const analyticsRoutes = require("./routes/analytics")
 
 // Middleware
-app.use(
-  cors(),
-)
+
+// --- CORS FIX ---
+// We now configure CORS to only allow requests from your live frontend
+// It will use the FRONTEND_URL you set in Vercel's environment variables
+const corsOptions = {
+  origin: process.env.FRONTEND_URL || "http://localhost:5173",
+  credentials: true, // Allows cookies/auth headers to be sent
+  optionsSuccessStatus: 200 // For older browsers
+}
+app.use(cors(corsOptions))
+// --- END FIX ---
+
 app.use(express.json({ limit: "10mb" }))
 app.use(express.urlencoded({ extended: true, limit: "10mb" }))
 
@@ -50,39 +59,23 @@ const connectDB = async () => {
 // Connect to database
 connectDB()
 
-
 // Error handling middleware
 app.use((err, req, res, next) => {
- console.error("Error:", err.stack)
- res.status(500).json({
- message: "Something went wrong!",
- error: process.env.NODE_ENV === "development" ? err.message : "Internal server error",
-})
+  console.error("Error:", err.stack)
+  res.status(500).json({
+    message: "Something went wrong!",
+    error: process.env.NODE_ENV === "development" ? err.message : "Internal server error",
+  })
 })
 
 // Handle 404 routes
 app.use("*", (req, res) => {
- res.status(404).json({ message: "Route not found" })
+  res.status(404).json({ message: "Route not found" })
 })
 
+// The app.listen and process.on('SIGTERM') blocks have been removed
+// as they are not needed for Vercel's serverless environment.
 
- // REMOVE THIS BLOCK - Vercel handles starting the server.
-
-  const PORT = process.env.PORT || 3000
-  app.listen(PORT, () => {
-   console.log(`Server running on port ${PORT}`)
-  console.log(`Environment: ${process.env.NODE_ENV || "development"}`)
-  })
-
-
-// Graceful shutdown - This is also for traditional servers and can be removed for Vercel.
-process.on("SIGTERM", () => {
- console.log("SIGTERM received, shutting down gracefully")
- mongoose.connection.close(() => {
- console.log("MongoDB connection closed")
- process.exit(0)
- })
-})
-
-// // ADD THIS LINE - This is what Vercel needs.
-// module.exports = app
+// ---- VERCEL CRITICAL CHANGE ----
+// Export the app handler for Vercel to use
+module.exports = app
